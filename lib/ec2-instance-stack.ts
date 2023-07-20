@@ -7,15 +7,10 @@ export class Ec2InstanceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const myIpAddressParameter = new cdk.CfnParameter(this, 'myIpAddress', {
-        type: 'String',
-        description: 'The IP address of the user'
-    });
-
-    const myIpAddress = myIpAddressParameter.valueAsString;
+    const myIpAddress = require('child_process').execSync('curl -s https://checkip.amazonaws.com').toString().trim();
 
     const vpc = ec2.Vpc.fromLookup(this, 'VPC', {
-        vpcId: 'vpc-0724c9f8d721a7c87'
+        vpcId: 'vpc-09dc13e99caf04a80'
     });
 
     const cfnKeyPair = new ec2.CfnKeyPair(this, 'keypair', {
@@ -44,17 +39,20 @@ export class Ec2InstanceStack extends cdk.Stack {
         associatePublicIpAddress: true,
     });
 
-    new cdk.CfnOutput(this, 'InstancePublicIp', {
-        value: instance.instancePublicIp
+    new cdk.CfnOutput(this, 'Step0', {
+        value: 'Connection steps: '
     });
 
-    new cdk.CfnOutput(this, 'InstancePublicDnsName', {
-        value: instance.instancePublicDnsName
+    new cdk.CfnOutput(this, 'Step1', {
+        value: `1. aws ssm get-parameter --name /ec2/keypair/${cfnKeyPair.attrKeyPairId} --with-decryption --query 'Parameter.Value' --output text > keypair1.pem`
     });
 
-    new cdk.CfnOutput(this, 'keypair1', {
-        value: cfnKeyPair.keyName,
-        description: 'Name of the keypair'
+    new cdk.CfnOutput(this, 'Step2', {
+        value: `2. chmod 400 keypair1.pem`
+    });
+
+    new cdk.CfnOutput(this, 'Step3', {
+        value: `3. ssh -i keypair1.pem ec2-user@${instance.instancePublicDnsName}`
     });
 
   }
