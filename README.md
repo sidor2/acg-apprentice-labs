@@ -26,16 +26,20 @@ npm install
 To deploy the AWS CDK stacks, run the following command in the project root directory:
 
 ```bash
-npx cdk ls
+cdk bootstrap
 ```
 
 ```bash
-npx cdk deploy <stack-name>
+cdk ls
+```
+
+```bash
+cdk deploy <stack-name>
 ```
 
 ## Clean Up
 To remove the AWS CDK stack and associated resources, run the following command:
 
 ```bash
-npx cdk destroy
+cdk destroy
 ```

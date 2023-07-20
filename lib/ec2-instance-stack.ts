@@ -1,3 +1,6 @@
+// solution to a lab from A Cloud Guru
+// https://learn.acloud.guru/handson/6fc1cc38-73cd-4abf-bdc4-2d718b1f1cd1
+
 import * as cdk from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
@@ -9,8 +12,10 @@ export class Ec2InstanceStack extends cdk.Stack {
 
     const myIpAddress = require('child_process').execSync('curl -s https://checkip.amazonaws.com').toString().trim();
 
+
+    // The VPC ID needs to be provided in the code below
     const vpc = ec2.Vpc.fromLookup(this, 'VPC', {
-        vpcId: 'vpc-09dc13e99caf04a80'
+        vpcId: 'vpc-0bd2c8e2e89575141'
     });
 
     const cfnKeyPair = new ec2.CfnKeyPair(this, 'keypair', {

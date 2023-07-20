@@ -74,5 +74,31 @@
         ]
       }
     ]
+  },
+  "vpc-provider:account=021372886067:filter.vpc-id=vpc-0bd2c8e2e89575141:region=us-east-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0bd2c8e2e89575141",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "021372886067",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-018f8d869b5d7289a",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "us-east-1a",
+            "routeTableId": "rtb-0ebd397ef9afd8206"
+          },
+          {
+            "subnetId": "subnet-0cd235fcf78e4b14d",
+            "cidr": "10.0.2.0/24",
+            "availabilityZone": "us-east-1b",
+            "routeTableId": "rtb-0ebd397ef9afd8206"
+          }
+        ]
+      }
+    ]
   }
 }
