@@ -1,3 +1,6 @@
+// solution to a lab from A Cloud Guru
+// https://learn.acloud.guru/handson/2cc3cf9e-61ce-475d-a00e-03306e9ba285
+
 import * as cdk from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
