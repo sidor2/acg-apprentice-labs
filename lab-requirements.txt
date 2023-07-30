@@ -194,3 +194,158 @@ Click on the Subnet associations tab.
 Click Edit subnet associations.
 Select the DBLayer1private and DBLayer2private subnets.
 Click Save changes.
+--------------------------------------------------------------------------------------------
+Configure Security Groups
+Log in to the AWS console, navigate to Services.
+Click VPC, located under Networking & Content Delivery.
+Click Security Groups, located in the left sidebar menu.
+Select Security Group Bastion, and click Inbound rules, located in the lower panel.
+Click Edit inbound rules.
+Click, Add rule, and set the following values:
+Type: SSH
+Source: Anywhere
+Click Save rules.
+Select Security Group ALB, and click Inbound rules, located in the lower panel.
+Click Edit inbound rules.
+Click, Add rule, and set the following values:
+Type: HTTP
+Source: Anywhere
+. Click, Add rule to add another rule, and set the following values:
+Type: HTTPS
+Source: Anywhere
+Click Save rules.
+Select Security Group AppServer, and click Inbound rules, located in the lower panel.
+Click Edit inbound rules.
+Click, Add rule, and set the following values:
+Type: HTTP
+Source: Custom ALB Security Groups (select from search field)
+Click, Add rule to add another rule, and set the following values:
+Type: SSH
+Source: Custom Bastion Security Groups (select from search field)
+Click Save rules.
+Select Security Group RDSDB, and click Inbound rules, located in the lower panel.
+Click Edit inbound rules.
+Click, Add rule, and set the following values:
+Type: MySQL/Aurora
+Source: Custom AppServer Security Groups (select from search field)
+Click Save rules.
+Configure DMZ ACL
+Click Network ACLs, located in the left sidebar menu.
+Select Network ACLs DMZ, and click Inbound rules, located in the lower panel.
+Click Edit inbound rules.
+Click, Add new rule, and set the following values:
+Rule number: 100
+Type: SSH (22)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 110
+Type: HTTP (80)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 120
+Type: HTTPS (443)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 130
+Type: Custom TCP
+Port range: 1024-65535
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click Save changes.
+Click Outbound rules, located in the lower panel.
+Click Edit outbound rules.
+Click, Add new rule, and set the following values:
+Rule number: 100
+Type: SSH (22)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 110
+Type: HTTP (80)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 120
+Type: HTTPS (443)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 130
+Type: Custom TCP
+Port range: 1024-65535
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click Save changes.
+Click Subnet associations, located in the lower panel.
+Click Edit subnet associations.
+Select DMZ1public and DMZ2public.
+Click Save changes.
+Configure the AppLayer ACL
+Deselect Network ACL, DMZ, and select AppLayer.
+Click Inbound rules, and click Edit inbound rules.
+Click, Add new rule, and set the following values:
+Rule number: 100
+Type: HTTP (80)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 110
+Type: Custom TCP
+Port range: 1024-65535
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click Save changes.
+Click Outbound rules, located in the lower panel.
+Click Edit outbound rules.
+Click, Add new rule, and set the following values:
+Rule number: 100
+Type: HTTP (80)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 110
+Type: Custom TCP
+Port range: 1024-65535
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click Save changes.
+Click Subnet associations, located in the lower panel.
+Click Edit subnet associations.
+Select AppLayer1 and AppLayer2.
+Click Save changes.
+Configure the DBLayer ACL
+Deselect Network ACL, AppLayer, and select DBLayer.
+Click Inbound rules, and click Edit inbound rules.
+Click, Add new rule, and set the following values:
+Rule number: 100
+Type: MySQL/Aurora (3306)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 110
+Type: Custom TCP
+Port range: 1024-65535
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click Save changes.
+Click Outbound rules, located in the lower panel.
+Click Edit outbound rules.
+Click, Add new rule, and set the following values:
+Rule number: 100
+Type: MySQL/Aurora (3306)
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click, Add new rule to add another rule, and set the following values:
+Rule number: 110
+Type: Custom TCP
+Port range: 1024-65535
+Source: 0.0.0.0/0
+Allow/Deny: Allow
+Click Save changes.
+Click Subnet associations, located in the lower panel.
+Click Edit subnet associations.
+Select DBLayer1 and DBLayer2.
+Click Save changes.
