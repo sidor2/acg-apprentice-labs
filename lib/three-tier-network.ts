@@ -46,6 +46,12 @@ export class ThreeTierNetworkStack extends cdk.Stack {
                     fromPort: 80,
                     toPort: 80,
                     cidrIp: '0.0.0.0/0'
+                },
+                {
+                    ipProtocol: 'tcp',
+                    fromPort: 443,
+                    toPort: 443,
+                    cidrIp: '0.0.0.0/0'
                 }
             ],
             tags: [{ key: 'Name', value: 'ALBSecurityGroup' }]
