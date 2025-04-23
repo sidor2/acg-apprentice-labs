@@ -1,4 +1,4 @@
-# A Cloud Guru labs AWS CDK Stacks
+# AWS EC2, IAM, VPC CDK Stacks
 
 ## Description
 
